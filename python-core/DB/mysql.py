@@ -19,9 +19,9 @@ cursor = db.cursor()
 
 # 使用execute()方法执行SQL查询、fetchone()获取单条的数据信息
 # ----------------1.查询版本信息-----------------------------------
-# cursor.execute("SELECT VERSION()")
-# data = cursor.fetchone()
-# print("DataBase Version:%s" %data)
+cursor.execute("SELECT VERSION()")
+data = cursor.fetchone()
+print("DataBase Version:%s" %data)
 
 # 使用fetchall()获取所有的数据
 # ----------------2.查询表中数据-----------------------------------
@@ -32,14 +32,14 @@ cursor = db.cursor()
 # print(datas[0][4])
 
 # ----------------3.删除表、建立表---------------------------------
-# cursor.execute("DROP TABLE IF EXISTS log_event")
-#
-# sql = """CREATE TABLE log_event(
-#             id INT NOT NULL AUTO_INCREMENT,
-#             event_name VARCHAR(30) NOT NULL,
-#             json_value VARCHAR(1000) NOT NULL,
-#             PRIMARY  KEY(id))ENGINE=InnoDB DEFAULT CHARSET=utf8"""
-# cursor.execute(sql)
+cursor.execute("DROP TABLE IF EXISTS log_event")
+
+sql = """CREATE TABLE IF NOT EXISTS event(
+            id INT NOT NULL AUTO_INCREMENT,
+            event_name VARCHAR(30) NOT NULL,
+            json_value VARCHAR(1000) NOT NULL,
+            PRIMARY KEY(id))ENGINE=InnoDB DEFAULT CHARSET=utf8"""
+cursor.execute(sql)
 
 # ----------------4.插入数据---------------------------------------
 # json_data = '{"dataSet":"22222","index":"rainbow"}'

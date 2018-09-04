@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import os
-import logging
+import logging_coding
 import ctypes
 
 FOREGROUND_WHITE = 0x0007
@@ -18,18 +18,18 @@ def set_color(color, handle=std_out_handle):
     return bool
 
 class My_Logger:
-    def __init__(self, path, Clevel = logging.DEBUG, Flevel = logging.DEBUG):
-        self.logger = logging.getLogger(path)
-        self.logger.setLevel(logging.DEBUG)
-        fmt = logging.Formatter('[%(asctime)s] [%(levelname)s] %(message)s', '%Y-%m-%d %H:%M:%S')
+    def __init__(self, path, Clevel = logging_coding.DEBUG, Flevel = logging_coding.DEBUG):
+        self.logger = logging_coding.getLogger(path)
+        self.logger.setLevel(logging_coding.DEBUG)
+        fmt = logging_coding.Formatter('[%(asctime)s] [%(levelname)s] %(message)s', '%Y-%m-%d %H:%M:%S')
 
         # 设置CMD日志
-        sh = logging.StreamHandler()
+        sh = logging_coding.StreamHandler()
         sh.setFormatter(fmt)
         sh.setLevel(Clevel)
 
         # 设置文件日志
-        fh = logging.FileHandler(path)
+        fh = logging_coding.FileHandler(path)
         fh.setFormatter(fmt)
         fh.setLevel(Flevel)
 
@@ -56,7 +56,7 @@ class My_Logger:
     #     self.logger.critical(message)
 
 if __name__=="__main__":
-    logger = My_Logger('log_class.log', logging.DEBUG, logging.DEBUG)
+    logger = My_Logger('log_class.log', logging_coding.DEBUG, logging_coding.DEBUG)
     logger.debug("debug messsage")
     logger.info("info message")
     logger.warn("warn message")
