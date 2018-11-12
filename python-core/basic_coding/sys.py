@@ -14,6 +14,6 @@ print(sys.path)
 # print(sys.platform)
 
 # 4. 获取命令行参数
-# import sys
-# print(sys.argv[0])
-# print(sys.argv[1])
+import sys
+print(sys.argv[0])
+print(sys.argv[1])

@@ -162,15 +162,15 @@
 # file.close()
 
 # 10.搜索文件，输入一个字节值和一个文件名，显示该字符在文件中出现的次数
-filename, i = input("请输入要搜索的文件名称和要搜索的字节值: ").split()
-file = open(filename,"r")
-ch = chr(int(i))
-
-sum = 0
-for f in file:
-    sum += f.count(ch)
-
-print(sum)
+# filename, i = input("请输入要搜索的文件名称和要搜索的字节值: ").split()
+# file = open(filename,"r")
+# ch = chr(int(i))
+#
+# sum = 0
+# for f in file:
+#     sum += f.count(ch)
+#
+# print(sum)
 
 
 

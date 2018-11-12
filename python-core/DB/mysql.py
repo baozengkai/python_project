@@ -13,7 +13,6 @@ import pymysql
 # 连接数据库
 db = pymysql.connect("192.168.84.150","root","123456","BAOZENGKAI",use_unicode=True,charset="utf8")
 
-
 # 创建一个游标对象
 cursor = db.cursor()
 

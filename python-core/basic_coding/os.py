@@ -28,5 +28,5 @@ import os
 # print(os.path.isfile("C:/python_project/python-unittest/basic_coding/os.py"))
 
 # 2.8 os.path.isdir(path): 判断给定的是否是目录
-print(os.path.isdir("C:/python_project"))
+# print(os.path.isdir("C:/python_project"))
 

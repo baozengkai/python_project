@@ -25,18 +25,17 @@ import platform
         7.获取菜单栏的子菜单栏信息
 """
 # 例7 获取某个子菜单 某个菜单项的内容
-def GetMenuItemString(id):
-    pHandle = win32gui.FindWindow(None, u"test - 记事本")
-    menuHandle = win32gui.GetMenu(pHandle)
-    menuSubHandle = win32gui.GetSubMenu(menuHandle, 0)
-
-    buf, extra = win32gui_struct.EmptyMENUITEMINFO()
-    win32gui.GetMenuItemInfo(menuSubHandle, id, True, buf)
-    fType,fState, wID, hSubMenu, hbmpChecked, hbmpUnchecked, dwItemData, text, hbmpItem = win32gui_struct.UnpackMENUITEMINFO(buf)
-    print text.decode("gbk").encode("UTF-8")
-    print fType
-    print fState
-    return text
+# def GetMenuItemString(id):
+#     pHandle = win32gui.FindWindow(None, u"test - 记事本")
+#     menuHandle = win32gui.GetMenu(pHandle)
+#     menuSubHandle = win32gui.GetSubMenu(menuHandle, 0)
+#
+#     buf, extra = win32gui_struct.EmptyMENUITEMINFO()
+#     win32gui.GetMenuItemInfo(menuSubHandle, id, True, buf)
+#     fType,fState, wID, hSubMenu, hbmpChecked, hbmpUnchecked, dwItemData, text, hbmpItem = win32gui_struct.UnpackMENUITEMINFO(buf)
+#     print text.decode("gbk").encode("UTF-8")
+#     print fState
+#     return text
 
 # 例1
 def onMouseEvent(event):
@@ -53,11 +52,12 @@ def onMouseEvent(event):
             print "WindowName", event.WindowName
         print "Position", event.Position
         print "Left", left
-        print "Wheel", event.Wheel  #当滑轮使用的时候
-        print "Injected", event.Injected #当该事件是编程产生的时候
+        print "Wheel", event.Wheel  # 当滑轮使用的时候
+        print "Injected", event.Injected # 当该事件是编程产生的时候
         print "---------------------------------------------------"
 
-        GetMenuItemString(0)
+        # GetMenuItemString(0)
+        # GetMenuItemString(1)
     return True
 
 if __name__ == '__main__':
