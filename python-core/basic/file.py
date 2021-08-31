@@ -23,7 +23,7 @@
 # f.close()
 
 # 2. 文件过滤，显示一个文件的所有行，忽略以井号开头的行(两种做法)
-# f = open("C:/python_project/python-unittest/basic_coding/text","r")
+# f = open("C:/python_project/python-unittest/basic/text","r")
 # for line in f:
 #     if line[0]=='#':
 #         # continue
