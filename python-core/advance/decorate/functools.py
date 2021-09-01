@@ -6,6 +6,8 @@ from advance.decorate.time_decorate import clock_decorate
         1.1) functools.wraps(func) 将被装饰的函数的元信息(name、doc等)拷贝到封装的函数wrapper()中
         1.2) functools.lru_cache(maxsize=128, typed=False)
 """
+
+
 # 1.1 functools.wraps(func)示例
 def decorate(func):
     @functools.wraps(func)
