@@ -6,7 +6,8 @@
            场景二: 设置只读装饰，防止属性被修改
       1.3) property装饰问题
            1.3.1) 当类属性和实例属性同名的时候，通过实例对象读取属性的时候，读取的是实例属性，通过类读取属性的时候，读取是类属性
-           1.3.2) 特性可以被覆盖修改
+           1.3.2) 特性可以被覆盖和删除，当特性存在的时候，通过对象读取属性，读取的是特性属性
+           1.3.3) 特征工厂函数
       1.4) 相关内置函数和属性
            1.4.1) __dict__和vars()(PS: 类本身和对象本身都可以调用__dict__)
 """
@@ -31,8 +32,8 @@ class LineItem:
 
 line_item = LineItem("book1", 1, 10)
 print(line_item.get_weight())
-
-
+#
+#
 # 1.2 @propert装饰的getter和setter方法
 class LineItem2:
     """
@@ -57,30 +58,61 @@ line_item2 = LineItem2("book2", 2, 20)
 print(line_item2.weight)
 print(vars(line_item2))
 print(vars(LineItem2))
+#
+#
+# # 1.3 类属性、实例属性和特性
+# class Class:
+#     data = "the class data str"
+#
+#     @property
+#     def prop(self):
+#         return "the prop value"
+#
+#
+# # 1.3.1) 当类属性和实例属性同名的时候，通过实例对象读取属性的时候，读取的是实例属性，通过类读取属性的时候，读取是类属性
+# obj = Class()
+# # print(vars(obj))
+# # obj.data = 'object value'
+# # print(vars(obj))
+# # print(Class.data)
+# # print(obj.data)
+#
+#
+# # 1.3.2) 特性可以被覆盖销毁
+# print(obj.prop)
+# print(Class.__dict__)
+# Class.prop = 'baz'
+# print(Class.__dict__)
+# print(obj.__dict__)
+# print(obj.prop)
 
 
-# 1.3 类属性、实例属性和特性
-class Class:
-    data = "the class data str"
+# 1.3.3 特征工厂函数和property函数
+def quantity(storage_name):
 
-    @property
-    def prop(self):
-        return "the prop value"
+    def qty_getter(instance):
+        return instance.__dict__[storage_name]
 
-
-# 1.3.1) 当类属性和实例属性同名的时候，通过实例对象读取属性的时候，读取的是实例属性，通过类读取属性的时候，读取是类属性
-obj = Class()
-# print(vars(obj))
-# obj.data = 'object value'
-# print(vars(obj))
-# print(Class.data)
-# print(obj.data)
+    def qty_setter(self, value):
+        if value > 0:
+            self.__dict__[storage_name] = value
+        else:
+            raise ValueError('value must be > 0')
+    return property(qty_getter, qty_setter)
 
 
-# 1.3.2) 特性可以被覆盖销毁
-print(obj.prop)
-print(Class.__dict__)
-Class.prop = 'baz'
-print(Class.__dict__)
-print(obj.__dict__)
-print(obj.prop)
+class LineItem:
+    weight = quantity('weight')
+    price = quantity('price')
+
+    def __init__(self, description, weight, price):
+        self.description = description
+        self.weight = weight
+        self.price = price
+
+    def subtotal(self):
+        return self.weight * self.price
+
+
+nutmeg = LineItem('Moluccan nutmeg', 8, 13.95)
+print(nutmeg.weight)
