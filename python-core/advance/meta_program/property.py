@@ -10,6 +10,9 @@
            1.3.3) 特征工厂函数
       1.4) 相关内置函数和属性
            1.4.1) __dict__和vars()(PS: 类本身和对象本身都可以调用__dict__)
+    2.属性描述符
+      2.1) 简单的描述符
+
 """
 
 
@@ -116,3 +119,56 @@ class LineItem:
 
 nutmeg = LineItem('Moluccan nutmeg', 8, 13.95)
 print(nutmeg.weight)
+print("---------------")
+
+# 2.1 属性描述符类替换特性工厂函数
+class Quantity():
+    def __init__(self,storage_name):
+        self.storage_name = storage_name
+
+    def __get__(self, instance, owner):
+        print("__get__")
+        return instance.__dict__[self.storage_name]
+
+    def __set__(self, instance, value):
+        print("__set__")
+        if value < 0:
+            raise ValueError("Value must be >0")
+        else:
+            instance.__dict__[self.storage_name] = value
+
+
+class LineItem2:
+    weight = Quantity('weight')
+    price = Quantity('price')
+
+    def __init__(self, description, _weight, _price):
+        self.description = description
+        self.weight = _weight
+        self.price = _price
+
+    def subtotal(self):
+        return self.weight * self.price
+
+
+line_item2 = LineItem2("book2", 2, 1)
+print(line_item2.weight)
+line_item2.weight = 3
+
+
+# print("---------------")
+# class TestDes:
+#     def __get__(self, instance, owner):
+#         print(instance, owner)
+#         return 'TestDes:__get__'
+#
+#
+# class TestMain:
+#     des = TestDes()
+#
+#
+# if __name__ == '__main__':
+#     t = TestMain()
+#     print(t.des)
+#     print(TestMain.des)
+#     print(TestMain.__dict__)
